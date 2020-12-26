@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%load static%}
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{% static 'heaven_app/css/style.css'%}">
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'heaven_app/css/bootstrap.min.css'%}" rel="stylesheet">
+
+    <title>Heaven's Above  - SignUp</title>
+</head>
+<body>
+    
+    <!-- Navigation -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+        <a class="navbar-brand" href="/">Heavens above</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Page Content -->
+    <main class="sign-up">
+        {% if messages %}
+        <ul class="messages">    
+            {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <div class="container">
+            <div class="row">
+                <div class="col col1 card border-secondary">
+                    <div class="card-header">
+                        <h3>Login to site</h3>
+                        <p>Enter Email and password to log in:</p>
+                    </div>
+                    <div class="form-box">
+                        <div class="form-bottom">
+                            
+                            <form action="/login" method="post" class="login-form">
+                                {% csrf_token %}
+                                <div class="form-group row">
+                                    <label for="email" class="col-md-3 col-form-label">Email: </label>
+                                    <div class="col">
+                                    <input type="text" name="login_email" placeholder="Email..." class="form-email form-control" id="form-email">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="password" class="col-md-3 col-form-label">Password:</label>
+                                    <div class="col">
+                                        <input name="login_password" type="password" class="form-control" id="password" placeholder="Password">
+                                    </div>
+                                </div>
+                                <div class="row justify-content-md-center button-signup">
+                                    <button type="submit" class="btn btn-primary">Login</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="col col2 card border-primary">
+                    <div class="card-header">
+                        <h3>Sign up now</h3>
+                        <p>Fill in the form below to get yourself registered:</p>
+                    </div>
+                    <div class="form-box">
+                        <div class="form-bottom">
+                            <form action="/register" method="post" class="registration-form">
+                                {% csrf_token %}
+                                <div class="form-group row">
+                                    <label for="first name" class="col-md-4 col-form-label">First name</label>
+                                    <div class="col">
+                                        <input type="text" name="first_name" placeholder="First name..." class="form-first-name form-control" id="form-first-name">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="last name" class="col-md-4 col-form-label">Last name</label>
+                                    <div class="col">
+                                        <input type="text" name="last_name" placeholder="Last name..." class="form-last-name form-control" id="form-last-name">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="email" class="col-md-4 col-form-label">Email</label>
+                                    <div class="col">
+                                        <input type="text" name="email" placeholder="Email..." class="form-email form-control" id="form-email">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="address" class="col-md-4 col-form-label">Address:</label>
+                                    <div class="col">
+                                        <input type="text" name="address" placeholder="Address..." class="form-last-name form-control" id="address">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputPassword" class="col-md-4 col-form-label">Password:</label>
+                                    <div class="col">
+                                        <input name="password" type="password" class="form-control" id="inputPassword" placeholder="Password">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="confirmPassword" class="col-md-4 col-form-label">Confirm Password:</label>
+                                    <div class="col">
+                                        <input name="confirm_password" type="password" class="form-control" id="inputPassword" placeholder="Confirm you password">
+                                    </div>
+                                </div>
+                                <div class="row justify-content-md-center button-signup">
+                                    <button type="submit" class="btn btn-primary">Register</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-4 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Heaven's Above 2020</p>
+        </div>
+    </footer>
+</body>
+</html>

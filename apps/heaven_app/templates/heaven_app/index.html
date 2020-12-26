@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Heaven's Above</title>
+
+  {%load static%}
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{% static 'heaven_app/css/style.css'%}">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'heaven_app/css/bootstrap.min.css'%}" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+    
+    <div class="container">
+      
+    <a class="navbar-brand" href="/">Heavens above</a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/contact">Contact</a>
+          </li>
+          {%if 'user_id' in request.session%}
+              {%if request.session.user_role %}
+          <li class="nav-item active">
+            <a class="nav-link" href="/admin/{{request.session.user_id}}">DashBoard</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
+            {%else%}
+          <li class="nav-item active">
+            <a class="nav-link" href="/account/{{request.session.user_id}}">Profile</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
+            {%endif%}
+            {%else%}
+            <li class="nav-item active">
+              <a class="nav-link" href="/signup">Login/Register</a>
+            </li>
+            {%endif%}
+        </ul>
+    </div>
+</nav>
+
+  <!-- carousel -->
+  <header>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <!-- Slide One - Set the background image for this slide in the line below -->
+        <div class="carousel-item active" style="background-image: url('https://artcandy.co.uk/wp-content/uploads/2020/07/frame.jpg')">
+          <div class="carousel-caption d-none d-md-block">
+          </div>
+        </div>
+        <!-- Slide Two - Set the background image for this slide in the line below -->
+        <div class="carousel-item" style="background-image: url('https://starmapsaustralia.com.au/wp-content/uploads/2020/10/Star-Map-Banner-Romantic-V3.jpg')">
+          <div class="carousel-caption d-none d-md-block">
+          </div>
+        </div>
+        <!-- Slide Three - Set the background image for this slide in the line below -->
+        <div class="carousel-item" style="background-image: url('https://i.pinimg.com/originals/6e/3f/86/6e3f86e2f659449967854c3fc845c999.jpg')">
+          <div class="carousel-caption d-none d-md-block">
+          </div>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Page Content -->
+  <div class="container">
+    <h1 class="my-4">Welcome to Heavens Above!</h1>
+    <!-- Marketing Icons Section -->
+    <div class="row">
+      <div class="col-lg-4 mb-4">
+        <div class="card h-100">
+          <h4 class="card-header">Star Maps</h4>
+          <div class="card-body">
+            <p class="card-text">We make beautiful star maps showing the unique alignment of the stars in a place and time chosen by you. Birthday, engagement, wedding.....</p>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="btn btn-primary">Learn More</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 mb-4">
+        <div class="card h-100">
+          <h4 class="card-header">Moon Phase</h4>
+          <div class="card-body">
+            <p class="card-text">Custom moon phase poster will bring back memories from your favorite nights. Now you can cherish your brightest moments and best memories under an identical sky! Truly unique moon phase gift.</p>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="btn btn-primary">Learn More</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 mb-4">
+        <div class="card h-100">
+          <h4 class="card-header">City Map</h4>
+          <div class="card-body">
+            <p class="card-text">takes your favorite cities, mountains, and places and turns them into beautiful works of art. If you're looking for the perfect way to remember that trip to Europe, honeymoon, place you got engaged, your alma mater, hometown, or anything else, our maps are a great way to display that nostalgia in your home. They make great gifts, too!</p>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="btn btn-primary">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+
+    <!-- /.searchbar -->
+    <form action="search" method="GET" class="form-inline search" >
+      <div class="input-group mb-3">
+          <input type="text" class="form-control" name='q' id="product1" placeholder="Enter a keyword" >
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="text" id="button-addon2">Go</button>
+        </div>
+      </div>
+    </form>       
+    <!-- /.row -->
+    <div class="row">
+      {%for p in product%}
+      <div class="col-lg-4 col-sm-6 portfolio-item">
+        <div class="card h-100">
+          <a href="details/{{p.id}}"><img class="card-img-top" src="{% static 'heaven_app/img/'%}{{p.image}}" alt=""></a>
+          <div class="card-body">
+            <h4 class="card-title">
+              <a href="details/{{p.id}}">{{p.title}}</a>
+            </h4>
+            <p class="card-text">{{p.description}}</p>
+          </div>
+        </div>
+      </div>
+      {%endfor%}
+    </div>
+    
+        <!--Pagination-->
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            {% if product.has_previous %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ product.previous_page_number }}">Previous</a>
+              </li>
+            {% else %}
+              <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+              </li>
+            {% endif %}
+            {% for i in product.paginator.page_range %}
+              {% if product.number == i %}
+                <li class="page-item active" aria-current="page">
+                  <span class="page-link">
+                    {{ i }}
+                    <span class="sr-only">(current)</span>
+                  </span>
+                </li>
+              {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+            {% endfor %}
+            {% if product.has_next %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ product.next_page_number }}">Next</a>
+              </li>
+            {% else %}
+              <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
+              </li>
+            {% endif %}
+          </ul>
+        </nav>
+        <!--end of Pagination-->
+    <hr>
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-4 bg-dark" >
+      <p class="m-0 text-center text-white">Copyright &copy; Heaven's Above 2020</p>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'heaven_app/js/jquery.min.js'%}"></script>
+  <script src="{% static 'heaven_app/js/bootstrap.bundle.min.js'%}"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    $(function () {
+        $("#product1").autocomplete({
+            source: '{% url "autocomplete" %}',
+            minLength: 2
+        });
+    });
+</script>
+</body>
+
+</html>

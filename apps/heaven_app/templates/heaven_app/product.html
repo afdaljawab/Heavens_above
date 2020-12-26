@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Heaven's Above  - Edit Product</title>
+
+  {%load static%}
+  <link rel="stylesheet" href="{% static 'heaven_app/css/style.css'%}">
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'heaven_app/css/bootstrap.min.css'%}" rel="stylesheet">
+  <!-- Custom styles for this template -->
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+      <a class="navbar-brand" href="/">Heavens above</a>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="about">About</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="contact">Contact</a>
+          </li>
+        </ul>
+        <a class="nav-link" href="signup">Login/Register</a>
+      </div>
+  </nav>
+    <div class="container"> 
+      <div class="row">
+        <div class="m-5 col-md-4 mx-auto">
+          <form action='/updateproduct/{{myproduct.id}}' method='post'>
+		  {% csrf_token %}
+            <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title" value="{{myproduct.title}}" placeholder="">
+            </div>
+            <div class="form-group">
+            <label for="price">Price</label>
+            <input type="text" class="form-control" id="price" name="price" value="{{myproduct.price}}" placeholder="">
+            </div>
+            <div class="form-group">
+			<label for="image">{{myproduct.image}}</label>
+            <input type="file" id="image" name="image" accept="image/*">
+            </div>
+            <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" id="description" name="description" value="{{myproduct.description}}" placeholder="">
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+          </form>
+        </div>
+      </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="py-4 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'heaven_app/js/jquery.min.js'%}"></script>
+  <script src="{% static 'heaven_app/js/bootstrap.bundle.min.js'%}"></script>
+
+</body>
+
+</html>

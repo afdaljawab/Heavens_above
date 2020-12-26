@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Heaven's Above  - Admin</title>
+    {%load static%}
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{% static 'heaven_app/css/style.css'%}">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'heaven_app/css/bootstrap.min.css'%}" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+        <a class="navbar-brand" href="/">Heavens above</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/contact">Contact</a>
+                </li>
+                {%if 'user_id' in request.session%}
+                    {%if request.session.user_role %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="/admin/{{request.session.user_id}}">DashBoard</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+                    {%else%}
+                <li class="nav-item active">
+                    <a class="nav-link" href="/account/{{request.session.user_id}}">Profile</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+                    {%endif%}
+                    {%else%}
+                    <li class="nav-item active">
+                    <a class="nav-link" href="/signup">Login/Register</a>
+                    </li>
+            {%endif%}
+            </ul>
+        </div>
+    </nav>
+<!-- header-->
+<section class="py-5 header">
+    <div class="container py-4">
+
+
+        {% if messages %}
+        <ul class="messages">    
+            {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <div class="row">
+            <div class="col-md-3">
+                <!-- Tabs nav -->
+                <div class="nav flex-column nav-pills nav-pills-custom" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+					<h4>Admin Tools</h4>						
+                    <a class="nav-link mb-3 p-3 shadow active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-all-users" role="tab" aria-controls="v-pills-all-users" aria-selected="true">
+                        <i class="fa fa-user-circle-o mr-2"></i>
+                        <span class="font-weight-bold small text-uppercase">All Users</span>				
+                    <a class="nav-link mb-3 p-3 shadow" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-all-products" role="tab" aria-controls="v-pills-all-products" aria-selected="false">
+                        <i class="fa fa-calendar-minus-o mr-2"></i>
+                        <span class="font-weight-bold small text-uppercase">All Products</span></a>
+
+                    <a class="nav-link mb-3 p-3 shadow" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-all-orders" role="tab" aria-controls="v-pills-all-orders" aria-selected="false">
+                        <i class="fa fa-star mr-2"></i>
+                        <span class="font-weight-bold small text-uppercase">All Orders</span></a>
+
+                    <a class="nav-link mb-3 p-3 shadow" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-new-product" role="tab" aria-controls="v-pills-new-product" aria-selected="false">
+                        <i class="fa fa-check mr-2"></i>
+                        <span class="font-weight-bold small text-uppercase">Create New Product</span></a>
+                    <a class="nav-link mb-3 p-3 shadow" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-new-user" role="tab" aria-controls="v-pills-new-user" aria-selected="false">
+                        <i class="fa fa-check mr-2"></i>
+                        <span class="font-weight-bold small text-uppercase">Create New Admin</span></a>
+                    </div>
+            </div>
+
+
+            <div class="col-md-9">
+                <!-- Tabs content -->
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade shadow rounded show active p-3" id="v-pills-all-users" role="tabpanel" aria-labelledby="v-pills-all-users-tab">
+                        <h4 class="font-italic mb-4">All Users</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th>ID</th>
+                            <th>Firstname</th>
+                            <th>Lastname</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+						{% for user in myusers %}
+                        <tr>
+                            <td>{{user.id}}</td>
+                            <td>{{user.first_name}}</td>
+                            <td>{{user.last_name}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.address}}</td>
+                            <td><a href="/account/{{user.id}}">Edit</a></td>
+                            <td><a href="/deleteuser/{{user.id}}">Delete</a></td>
+                        </tr>
+						{% endfor %}
+                        </tbody>
+                        </table>	
+                    </div>
+                    
+                    <div class="tab-pane fade shadow rounded p-4" id="v-pills-all-products" role="tabpanel" aria-labelledby="v-pills-all-products-tab">
+                        <h4 class="font-italic mb-4">All Products</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+							<th>Description</th>
+                            <th>Price</th>
+                            <th>Stock Level</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                    <tbody>
+					{% for product in myproducts %}
+                        <tr>
+                            <td>{{product.id}}</td>
+                            <td>{{product.title}}</td>
+							<td>{{product.description}}</td>
+                            <td>{{product.price}}</td>
+                            <td>{{product.quantity}}</td>
+                            <td><a href="/editproduct/{{product.id}}">Edit</a></td>
+                            <td><a href="/deleteproduct/{{product.id}}">Delete</a></td>
+                        </tr>
+					{% endfor %}
+                    </tbody>
+                    </table>	
+                    </div>
+                    
+                    <div class="tab-pane fade shadow rounded p-4" id="v-pills-all-orders" role="tabpanel" aria-labelledby="v-pills-all-orders-tab">
+                        <h4 class="font-italic mb-4">All Orders</h4>
+                    <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+							<th>User ID</th>
+                            <th>User Name</th>
+                            <th>Product Title</th>
+                            <th>Product Price</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+					{% for order in myorders %}
+                        <tr>
+                            <td>{{order.id}}</td>
+							<td>{{order.created_at}}</td>
+							<td>{{order.user_id.id}}</td>
+                            <td>{{order.user_id.first_name}} {{order.user_id.last_name}}</td>
+							<td>{{order.product_id.title}}</td>
+                            <td>{{order.product_id.price}}</td>
+                            <td><a href="/deleteorder/{{order.id}}">Delete</a></td>
+                        </tr>
+						{% endfor %}
+                        </tbody>
+                        </table>	
+                    </div>
+                    
+                    <div class="tab-pane fade shadow rounded p-5" id="v-pills-new-product" role="tabpanel" aria-labelledby="v-pills-new-product-tab">
+                        <h4 class="font-italic mb-4">Create New Product</h4>
+						<form action='/addproduct' method='post'>
+						{% csrf_token %}
+                        <div class="form-group">
+						<label for="title">Product Title</label>
+						<input type="text" class="form-control" id="title" name="title" placeholder="Enter Product Title">
+						</div>
+						<div class="form-group">
+						<label for="price">Price</label>
+						<input type="text" class="form-control" id="price" name="price" placeholder="Enter Product Price">
+						</div>
+                        <div class="form-group">
+						<label for="description">Description</label>
+						<input type="text" class="form-control" id="description" name="description" placeholder="Enter Product Description">
+						</div>
+						<div class="form-group">
+						<label for="image">Select image</label>
+                        <input type="file" id="image" name="image" accept="image/*">
+						</div>
+						<button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+					<div class="tab-pane fade shadow rounded p-5" id="v-pills-new-user" role="tabpanel" aria-labelledby="v-pills-new-user-tab">
+                        <h4 class="font-italic mb-4">Create New Admin</h4>
+						<form action='/addadmin' method='post'>
+						{% csrf_token %}
+                        <div class="form-group">
+						<label for="first_name">First Name</label>
+						<input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter First Name">
+						</div>
+						<div class="form-group">
+						<label for="last_name">Last Name</label>
+						<input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter Last Name">
+						</div>
+						<div class="form-group">
+						<label for="email">Email</label>
+						<input type="text" class="form-control" id="email" name="email" placeholder="Enter Email Address">
+						</div>
+						<div class="form-group">
+						<label for="password">Password</label>
+						<input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
+						</div>
+						<div class="form-group">
+						<label for="address">Address</label>
+						<input type="text" class="form-control" id="address" name="address" placeholder="Enter Home Address">
+						</div>
+						<button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer class="py-4 bg-dark">
+        <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+        </div>
+        <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'heaven_app/js/jquery.min.js'%}"></script>
+    <script src="{% static 'heaven_app/js/bootstrap.bundle.min.js'%}"></script>
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+</body>
+
+</html>

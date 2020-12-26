@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Heaven's Above  - Success</title>
+
+  {%load static%}
+  <link rel="stylesheet" href="{% static 'heaven_app/css/style.css'%}">
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'heaven_app/css/bootstrap.min.css'%}" rel="stylesheet">
+  <!-- Custom styles for this template -->
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+      <a class="navbar-brand" href="/">Heavens above</a>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+              <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item active">
+              <a class="nav-link" href="/about">About</a>
+          </li>
+          <li class="nav-item active">
+              <a class="nav-link" href="/contact">Contact</a>
+          </li>
+          {%if 'user_id' in request.session%}
+              {%if request.session.user_role %}
+          <li class="nav-item active">
+              <a class="nav-link" href="/admin/{{request.session.user_id}}">DashBoard</a>
+          </li>
+          <li class="nav-item active">
+              <a class="nav-link" href="/logout">Logout</a>
+          </li>
+              {%else%}
+          <li class="nav-item active">
+              <a class="nav-link" href="/account/{{request.session.user_id}}">Profile</a>
+          </li>
+          <li class="nav-item active">
+              <a class="nav-link" href="/logout">Logout</a>
+          </li>
+              {%endif%}
+              {%else%}
+              <li class="nav-item active">
+              <a class="nav-link" href="/signup">Login/Register</a>
+              </li>
+      {%endif%}
+      </ul>
+      </div>
+  </nav>
+  <div class="container thank-you"> 
+    <h1>Thank you for shopping with us</h1>
+    <h3>We will conatact you within 72 hours to process your order...</h3>
+    <img src="{% static 'heaven_app/img/thankyou.jpg'%}">
+  </div>
+
+  <!-- Footer -->
+  <footer class="py-4 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'heaven_app/js/jquery.min.js'%}"></script>
+  <script src="{% static 'heaven_app/js/bootstrap.bundle.min.js'%}"></script>
+
+</body>
+
+</html>

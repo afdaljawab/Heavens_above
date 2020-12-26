@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Heaven's Above  - Contact</title>
+
+  {%load static%}
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{% static 'heaven_app/css/style.css'%}">
+    <link href="{% static 'heaven_app/css/bootstrap.min.css'%}" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'heaven_app/css/modern-business.css'%}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+    <a class="navbar-brand" href="/">Heavens above</a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="about">About</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="contact">Contact</a>
+        </li>
+        {%if 'user_id' in request.session%}
+              {%if request.session.user_role %}
+          <li class="nav-item active">
+            <a class="nav-link" href="/admin/{{request.session.user_id}}">DashBoard</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
+            {%else%}
+          <li class="nav-item active">
+            <a class="nav-link" href="/account/{{request.session.user_id}}">Profile</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
+            {%endif%}
+            {%else%}
+            <li class="nav-item active">
+              <a class="nav-link" href="/signup">Login/Register</a>
+            </li>
+            {%endif%}
+      </ul>
+    </div>
+</nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">Contact
+      <small>Us</small>
+    </h1>
+    <!-- Content Row -->
+    <div class="row">
+      <!-- Map Column -->
+      <div class="col-lg-8 mb-4">
+        <!-- Embedded Google Map -->
+        <iframe style="width: 100%; height: 400px; border: 0;" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d6773.240949790173!2d35.213274600000005!3d31.916907699999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1608644320513!5m2!1sen!2s" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+      </div>
+      <!-- Contact Details Column -->
+      <div class="col-lg-4 mb-4">
+        <h3>Contact Details</h3>
+        <p>
+          Al-Irsal Street
+          <br>Ramallah, WestBank, Palestine
+          <br>
+        </p>
+        <p>
+          <abbr title="Phone">Phone</abbr>: (123) 456-7890
+        </p>
+        <p>
+          <abbr title="Email">Email:</abbr>:
+          <a href="mailto:name@example.com">heavens.above.ps@gmail.com
+          </a>
+        </p>
+        <p>
+          <abbr title="Hours">Hours:</abbr>: Sunday - Thursday, 9:00 AM to 5:00 PM
+        </p>
+      </div>
+    </div>
+    <!-- /.row -->
+
+
+  <!-- Footer -->
+  <footer class="py-4 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Heaven's Above 2020</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'heaven_app/js/jquery.min.js'%}"></script>
+  <script src="{% static 'heaven_app/js/bootstrap.bundle.min.js'%}"></script>
+
+  <!-- Contact form JavaScript -->
+  <!-- Do not edit these files! In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
+  <script src="{% static 'heaven_app/js/jqBootstrapValidation.js' %}"></script>
+  <script src="{% static 'heaven_app/js/contact_me.js' %}"></script>
+
+</body>
+
+</html>
